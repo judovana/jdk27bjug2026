@@ -374,6 +374,24 @@ Header (compact):
  * Be aware of `500: Prepare to Make Final Mean Final (JDK26)`
  * It is moreover done, but its "harder" usages (like AOT or class cache), are still to be done
 
+--PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
+# 538: [PEM Encodings of Cryptographic Objects (Third Preview)](https://openjdk.org/jeps/538)
+
+Quite a changed api:
+* The PEM class is now an ordinary class rather than a record. It now includes constructors that accept Base64-encoded content in byte arrays, which is more convenient for some use cases.
+* The DEREncodable interface is now named BinaryEncodable, to more accurately describe the binary data stored in PEM text.
+  * Distinguished Encoding Rules
+* The EncryptedPrivateKeyInfo class now includes getKeyPair methods that decrypt PKCS#8-encoded text containing a PublicKey.
+* The getKey and getKeyPair methods of EncryptedPrivateKeyInfo that took a password and Provider now take only a Key.
+* The withFactory method of PEMDecoder is now named withFactoriesOf to better describe that key and certificate factories are obtained from the given Provider.
+* A new CryptoException class indicates failures in cryptographic processing at runtime.
+
+otherwise still old good RSA' "Privacy-Enhanced Mail":
+```
+-----BEGIN PRIVATE KEY-----
+BLKAHBLAH5651BLAH
+-----END PRIVATE KEY-----
+```
 
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
 Q?

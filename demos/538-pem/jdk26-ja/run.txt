@@ -1,0 +1,8 @@
+KeyPair
+
+javac --enable-preview --release=26 KeyPairPemEncryptionDemo.java
+java --enable-preview KeyPairPemEncryptionDemo
+
+Decode 
+javac --enable-preview --release=26 PemDecodeDemo.java
+java --enable-preview PemDecodeDemo
