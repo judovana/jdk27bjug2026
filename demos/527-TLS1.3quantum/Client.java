@@ -1,4 +1,5 @@
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLParameters;
 import javax.net.ssl.TrustManagerFactory;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -24,10 +25,16 @@ public class Client {
         SSLContext sslContext = SSLContext.getInstance("TLS");
         sslContext.init(null, tmf.getTrustManagers(), null);
 
-        // No restrictions — JDK defaults include ML-KEM-768 (JEP 527) alongside
-        // classical groups, so this client works with both quantum and non-quantum servers.
+        // Restrict to TLS 1.3 + ML-KEM hybrid groups only (JEP 527).
+        // The handshake will fail if the server does not support a post-quantum key exchange.
+        SSLParameters sslParams = new SSLParameters();
+        sslParams.setProtocols(new String[]{"TLSv1.3"});
+        //sslParams.setNamedGroups(new String[]{"SecP256r1MLKEM768", "X25519MLKEM768"});
+        //sslParams.setNamedGroups(new String[] {"secp256r1", "x25519"});
+
         HttpClient client = HttpClient.newBuilder()
                 .sslContext(sslContext)
+                .sslParameters(sslParams)
                 .build();
 
         HttpRequest request = HttpRequest.newBuilder()
