@@ -24,6 +24,8 @@ public class Client {
         SSLContext sslContext = SSLContext.getInstance("TLS");
         sslContext.init(null, tmf.getTrustManagers(), null);
 
+        // No restrictions — JDK defaults include ML-KEM-768 (JEP 527) alongside
+        // classical groups, so this client works with both quantum and non-quantum servers.
         HttpClient client = HttpClient.newBuilder()
                 .sslContext(sslContext)
                 .build();
