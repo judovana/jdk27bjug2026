@@ -59,7 +59,7 @@ usually the STS serves as preview for next LTS, but whoat is not in last STS, ma
 538: [PEM Encodings of Cryptographic Objects (Third Preview)](https://openjdk.org/jeps/538)
 
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
-# Swing is not dead!
+# Swing is not dead?
 Používateľské rozhrania a desktopové aplikácie napísané pred viac ako dvadsiatimi rokmi na ňom dodnes fungujú úplne bez problémov.
 
 O tom, že táto technológia nielen prežíva, ale sa aj naďalej aktívne udržiava a modernizuje (napríklad prispôsobovaním sa novým grafickým rozhraniam ako Wayland pre Linux alebo Metal pre macOS), hovorí aj Phil Rice vo svojej prednáške The JDK Client Desktop: 2026 and Still Swinging. Jedným z najlepších a najznámejších dôkazov životaschopnosti tejto knižnice je aj populárne vývojové prostredie IntelliJ IDEA od JetBrains, ktoré už štvrťstoročie úspešne stojí práve na Swingu. V ďalšej verzii JDK dokonca pribudnú dva nové komponenty, JDatePicker a  JCalendarPane.
@@ -67,27 +67,65 @@ JDatePicker https://bugs.openjdk.org/browse/JDK-8379439
 
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
 # and bit of available features in JDK 28
+## Project Valhalla
 
-Project Valhalla
-
+https://openjdk.org/projects/valhalla/ :
 Project Valhalla is augmenting the Java object model with value objects, combining the abstractions of object-oriented programming with the performance characteristics of simple primitives.
 
-This Project is sponsored by the HotSpot Group.
-What’s New?
-
 August 2026:
-
     JEP 401: Value Objects (Preview) and JEP 539: Strict Field Initialization in the JVM (Preview) are now integrated and will be included in JDK 28! Try out value objects today with an early-access JDK 28 build.
 
-=>
-401:	Value Objects (Preview)
-535:	Shenandoah GC: Generational Mode by Default
-539:	Strict Field Initialization in the JVM (Preview)
+=> https://openjdk.org/projects/jdk/28/ :
+** 401:	Value Objects (Preview)
+   535:	Shenandoah GC: Generational Mode by Default
+** 539:	Strict Field Initialization in the JVM (Preview)
+   540:	Simple JSON API (Incubator)
+   541:	Deprecate the macOS/x64 Port for Removal
+JEPs proposed to target JDK 28	review ends
+542:	PEM Encodings of Cryptographic Objects	2026/08/26 
+  No more preview?
 
-..Still preview, but at least you do not need special repo/build
+So Valhalla will still be preview, but at least you do not need special repo/build and is just ok to enable it on cmdline
+
+--PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
+# [Post-Quantum Hybrid Key Exchange for TLS 1.3](https://openjdk.org/jeps/527)
+
+Implementing these hybrid key exchange schemes for TLS is the next step in the platform's support of post-quantum cryptography.
+
+blocks for implementing hybrid key exchange schemes are there:
+  * the addition of the KEM API in Java 21 (JEP 452)
+  * the ML-KEM algorithm in Java 24 (JEP 496).
+
+=>  three new post-quantum hybrid key exchange schemes that combine ML-KEM with the traditional Ephemeral Elliptic-Curve Diffie-Hellman (ECDHE) algorithms:
+
+```
+params.setNamedGroups(new String[] {
+    "SecP256r1MLKEM768", "X25519MLKEM768", "secp256r1", "x25519"
+});
+```
 
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
 # 523: [Make G1 the Default Garbage Collector in All Environments](https://openjdk.org/jeps/523)
+
+* It is not going to Interfere with user selection: A collector chosen explicitly will always override the JVM’s selection.
+* In scenarios in which the JVM previously selected the Serial collector, the performance should not degrade significantly.
+  * constrained environments were still using Serial
+* It was long way since JDK9 (default collector for server environments (JEP 248))
+
+* improved the G1 collector across all metrics
+  * 522:	G1 GC: Improve Throughput by Reducing Synchronization (jdk26)
+  * 475:	Late Barrier Expansion for G1  (jdk24)
+  * 423:	Region Pinning for G1 (jdk22)
+  * 345:	NUMA-Aware Memory Allocation for G1 (jdk14)
+  * 344:	Abortable Mixed Collections for G1  (jdk12)
+  * 346:	Promptly Return Unused Committed Memory from G1 (jdk12)
+  * 307:	Parallel Full GC for G1 (jdk10)
+* Also improved shared GC parts
+  * 304: Garbage-Collector Interface (jdk10)
+   * new collectors: Epsilon, Shenandoah, ZGC
+   * generational ZGC and Shenandoah
+   * 363: Remove the Concurrent Mark Sweep (CMS) Garbage Collector
+   * many small "unnamed" changes
 
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
 # 534: [Compact Object Headers by Default](https://openjdk.org/jeps/534) 1/2
