@@ -50,12 +50,12 @@ usually the STS serves as preview for next LTS, but whoat is not in last STS, ma
 534: [Compact Object Headers by Default](https://openjdk.org/jeps/534)
     ( 6%, 4th)
 
+537: [Vector API (Twelfth Incubator)](https://openjdk.org/jeps/537)
+   ( 6% 5th)
 531: [Lazy Constants (Third Preview)](https://openjdk.org/jeps/531)
     ( 5%) 6th
 532: [Primitive Types in Patterns, instanceof, and switch (Fifth Preview)](https://openjdk.org/jeps/532)
 533: [Structured Concurrency (Seventh Preview)](https://openjdk.org/jeps/533)
-537: [Vector API (Twelfth Incubator)](https://openjdk.org/jeps/537)
-   ( 6% 5th)
 538: [PEM Encodings of Cryptographic Objects (Third Preview)](https://openjdk.org/jeps/538)
 
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
@@ -383,15 +383,28 @@ Header (compact):
  * First preview at JDK 25, as 502 Stable Values
  * 526 Lazy Constants since JDK 26
    * note the class changes
+   * quite  a lot of changes based on feedbacl
  * Still preview in 27
+   * isInitialized and orElse removed
+   * Set.ofLazy added
  * Targeting the Holder-Class singleton idiom and friends
  * performance improvements 25<26<?27
  * Be aware of `500: Prepare to Make Final Mean Final (JDK26)`
  * It is moreover done, but its "harder" usages (like AOT or class cache), are still to be done
 
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
-# 538: [PEM Encodings of Cryptographic Objects (Third Preview)](https://openjdk.org/jeps/538)
+# 532: [Primitive Types in Patterns, instanceof, and switch (Fifth Preview)](https://openjdk.org/jeps/532)
 
+ * type patterns for all types, whether primitive or reference
+ * align type patterns with `instanceof`, and align `instanceof` with safe casting.
+  * don't forgot Records types
+
+ * since jdk23
+ * no changes in jdk25
+ * again no change in jdk27
+
+--PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
+# 538: [PEM Encodings of Cryptographic Objects (Third Preview)](https://openjdk.org/jeps/538)
 Quite a changed api:
 * The PEM class is now an ordinary class rather than a record. It now includes constructors that accept Base64-encoded content in byte arrays, which is more convenient for some use cases.
 * The DEREncodable interface is now named BinaryEncodable, to more accurately describe the binary data stored in PEM text.
@@ -401,10 +414,11 @@ Quite a changed api:
 * The withFactory method of PEMDecoder is now named withFactoriesOf to better describe that key and certificate factories are obtained from the given Provider.
 * A new CryptoException class indicates failures in cryptographic processing at runtime.
 
-otherwise still old good RSA' "Privacy-Enhanced Mail":
+otherwise still old good RSA's "Privacy-Enhanced Mail":
 ```
 -----BEGIN PRIVATE KEY-----
-BLKAHBLAH5651BLAH
+BlahbLAh5651BLaHBlaAhbLAh5651BLaH
+AhAaHAhbLAh5651BhbLAh5651BLaH==
 -----END PRIVATE KEY-----
 ```
 
