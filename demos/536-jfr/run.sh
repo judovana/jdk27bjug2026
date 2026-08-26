@@ -43,8 +43,8 @@ check dump27_1.jfr
 
 set +x
 /usr/lib/jvm/java-latest-openjdk/bin/java \
-       -XX:FlightRecorderOptions:'redact-key=+*pasword*' \
        -XX:StartFlightRecording:filename=dump27_2.jfr \
+       -XX:FlightRecorderOptions:'redact-key=+*pasword*,redact-argument=+*pasword*' \
        -Xmx2G \
        -Djavax.net.ssl.keyStorePassword=SECRET_PASSWORD \
        ../527-TLS1.3quantum/Client.java \

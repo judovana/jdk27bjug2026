@@ -119,6 +119,7 @@ Demo!
 
 * Removal of sensitive information from JFR events and recordings
 * Default behavior is changed, use ` -XX:FlightRecorderOptions:'redact-argument=none,redact-key=none' to restore it
+* it is glob, not regex (speed)
 
 Demo!
 
