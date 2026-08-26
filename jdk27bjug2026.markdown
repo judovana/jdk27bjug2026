@@ -60,10 +60,16 @@ usually the STS serves as preview for next LTS, but whoat is not in last STS, ma
 
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
 # Swing is not dead?
-Používateľské rozhrania a desktopové aplikácie napísané pred viac ako dvadsiatimi rokmi na ňom dodnes fungujú úplne bez problémov.
 
-O tom, že táto technológia nielen prežíva, ale sa aj naďalej aktívne udržiava a modernizuje (napríklad prispôsobovaním sa novým grafickým rozhraniam ako Wayland pre Linux alebo Metal pre macOS), hovorí aj Phil Rice vo svojej prednáške The JDK Client Desktop: 2026 and Still Swinging. Jedným z najlepších a najznámejších dôkazov životaschopnosti tejto knižnice je aj populárne vývojové prostredie IntelliJ IDEA od JetBrains, ktoré už štvrťstoročie úspešne stojí práve na Swingu. V ďalšej verzii JDK dokonca pribudnú dva nové komponenty, JDatePicker a  JCalendarPane.
-JDatePicker https://bugs.openjdk.org/browse/JDK-8379439
+In May 2026 there was an rumor that Swing is still alive, and there is going to be new components of
+* JDatePicker
+* JCalendarPane.
+* based on awesome https://www.youtube.com/watch?v=ux1IpWo3oXA
+
+in **next release of JDK**
+
+Both are https://bugs.openjdk.org/browse/JDK-8379439, and where swing is really still alive (Wakefield.....)
+The components are not going to land in jdk27
 
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
 # and bit of available features in JDK 28
@@ -100,11 +106,19 @@ blocks for implementing hybrid key exchange schemes are there:
 
 ```
 params.setNamedGroups(new String[] {
-    "SecP256r1MLKEM768", "X25519MLKEM768", "secp256r1", "x25519"
+    "SecP256r1MLKEM768", "X25519MLKEM768"/*, "secp256r1", "x25519"*/
 });
 ```
 
 Where first two are quantum, other other two are backwards compatibility
+
+Demo!
+
+--PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
+# 536: [JFR In-Process Data Redaction](https://openjdk.org/jeps/536)
+
+* Removal of sensitive information from JFR events and recordings
+* Default behavior is changed, use ` -XX:FlightRecorderOptions:'redact-argument=none,redact-key=none' to restore it
 
 Demo!
 
