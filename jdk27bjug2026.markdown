@@ -87,11 +87,24 @@ August 2026:
 ** 539:	Strict Field Initialization in the JVM (Preview)
    540:	Simple JSON API (Incubator)
    541:	Deprecate the macOS/x64 Port for Removal
-JEPs proposed to target JDK 28	review ends
-542:	PEM Encodings of Cryptographic Objects	2026/08/26 
+   542:	PEM Encodings of Cryptographic Objects	2026/08/26 
+
   No more preview?
 
 So Valhalla will still be preview, but at least you do not need special repo/build and is just ok to enable it on cmdline
+
+--PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
+# and bit of available features in JDK 28
+## JSON?
+https://openjdk.org/jeps/540 JEP 540: Simple JSON API (Incubator)
+
+
+## No preview?
+542:	PEM Encodings of Cryptographic Objects
+
+## And few more
+535:	Shenandoah GC: Generational Mode by Default
+541:	Deprecate the macOS/x64 Port for Removal
 
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
 # [Post-Quantum Hybrid Key Exchange for TLS 1.3](https://openjdk.org/jeps/527)
