@@ -24,8 +24,8 @@ and https://www.youtube.com/watch?v=UnA2jRVNb3M
 1x lts - every 2 years
 replaced feature driven releases for jdk8 and older. JDK9 was 9/2017, JDK8 was 9/2014 and JDK7 7/2011
 Originally the LTS was there every 3 years
-There is no lts - lts serves for oracle jdk. Openjdk aligns to it
-usually the STS serves as preview for next LTS, but whoat is not in last STS, may be in troubles
+There is no LTS - LTS serves for oracle JDK. OpenJDK aligns to it
+usually the STS serves as preview for next LTS, but what is not in last STS, may be in troubles
 
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
 # Migration path in Developers minds
@@ -55,8 +55,8 @@ usually the STS serves as preview for next LTS, but whoat is not in last STS, ma
 531: [Lazy Constants (Third Preview)](https://openjdk.org/jeps/531)
     ( 5%) 6th
 532: [Primitive Types in Patterns, instanceof, and switch (Fifth Preview)](https://openjdk.org/jeps/532)
-533: [Structured Concurrency (Seventh Preview)](https://openjdk.org/jeps/533)
 538: [PEM Encodings of Cryptographic Objects (Third Preview)](https://openjdk.org/jeps/538)
+533: [Structured Concurrency (Seventh Preview)](https://openjdk.org/jeps/533)
 
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
 # Swing is not dead?
@@ -79,7 +79,7 @@ https://openjdk.org/projects/valhalla/ :
 Project Valhalla is augmenting the Java object model with value objects, combining the abstractions of object-oriented programming with the performance characteristics of simple primitives.
 
 August 2026:
-    JEP 401: Value Objects (Preview) and JEP 539: Strict Field Initialization in the JVM (Preview) are now integrated and will be included in JDK 28! Try out value objects today with an early-access JDK 28 build.
+    "JEP 401: Value Objects (Preview) and JEP 539: Strict Field Initialization in the JVM (Preview) are now integrated and will be included in JDK 28"
 
 => https://openjdk.org/projects/jdk/28/ :
 ** 401:	Value Objects (Preview)
@@ -123,7 +123,7 @@ params.setNamedGroups(new String[] {
 });
 ```
 
-Where first two are quantum, other other two are backwards compatibility
+Where first two are postquantum, other other two are backwards compatibility
 
 Demo!
 
@@ -393,6 +393,7 @@ Header (compact):
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
 # 531: [Lazy Constants (Third Preview)](https://openjdk.org/jeps/531)
  * https://openjdk.org/jeps/531
+ * Targeting the Holder-Class singleton idiom and friends
  * First preview at JDK 25, as 502 Stable Values
  * 526 Lazy Constants since JDK 26
    * note the class changes
@@ -400,11 +401,18 @@ Header (compact):
  * Still preview in 27
    * isInitialized and orElse removed
    * Set.ofLazy added
- * Targeting the Holder-Class singleton idiom and friends
  * performance improvements 25<26<?27
  * Be aware of `500: Prepare to Make Final Mean Final (JDK26)`
  * It is moreover done, but its "harder" usages (like AOT or class cache), are still to be done
 
+--PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
+# Sealed keyword
+```
+public sealed interface Service permits Car, Truck {
+public abstract sealed class Vehicle permits Car, Truck {
+=> public final class Truck extends Vehicle implements Service {
+or public non-sealed class Car extends Vehicle implements Service {
+```
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
 # 532: [Primitive Types in Patterns, instanceof, and switch (Fifth Preview)](https://openjdk.org/jeps/532)
 
@@ -416,6 +424,7 @@ Header (compact):
  * no changes in jdk25
  * again no change in jdk27
 
+ * Sorry for the Demo. I was recently moved to AI project, and am still wondering what happened to our industry
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
 # 538: [PEM Encodings of Cryptographic Objects (Third Preview)](https://openjdk.org/jeps/538)
 Quite a changed api:
@@ -435,8 +444,36 @@ AhAaHAhbLAh5651BhbLAh5651BLaH==
 -----END PRIVATE KEY-----
 ```
 
+Small demo
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
-Q?
+# 533: [Structured Concurrency (Seventh Preview)](https://openjdk.org/jeps/533) 1/2
+
+ * nice and well controllable sets of threads
+ * Scoped value (jdk25) inheritance — subtasks automatically inherit ScopedValue bindings from the forking thread, replacing ThreadLocal propagation hacks.
+ * shared control out of the box
+   * Subtask grouping — StructuredTaskScope auto-cancels siblings on failure and guarantees cleanup on close.
+   * Joiners — pluggable completion policies: first-success, all-success, or custom.
+   * Error cascading — exceptions flow to join(), cancellation propagates parent→children automatically.
+   * Hierarchical dumps — thread dumps show task-subtask tree instead of flat threads.
+
+demos-old
+
+--PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
+# 533: [Structured Concurrency (Seventh Preview)](https://openjdk.org/jeps/533) 2/2
+new in  JDK 27:
+
+* The `StructuredTaskScope` and `Joiner` interfaces now have a third type parameter, R_X, for `the type of the exception` that the `join()` method of `StructuredTaskScope` can throw.
+* A new static open method in `StructuredTaskScope` implements the default join policy and uses a given UnaryOperator to produce the StructuredTaskScope configuration.
+* The Joiner factory methods `allSuccessfulOrThrow()`, `anySuccessfulOrThrow()`, and `awaitAllSuccessfulOrThrow()` now create joiners that cause `join()` to throw an ExecutionException when the outcome is an exception.
+  * New overloads of the three methods allow a Function to be specified to produce a different exception.
+  * The Joiner factory method `awaitAll()` has been removed.
+* The `onTimeout()` method of the Joiner interface has been replaced by the `timeout()` method, which either produces the result or throws an exception when the scope is cancelled by a timeout
+  * If the `timeout()` method throws an exception then the exception is thrown with a `CancelledByTimeoutException` as the cause.
+
+demos-new
+
+--PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
+# Q?
 
 https://github.com/judovana/jdk27bjug2026
 
