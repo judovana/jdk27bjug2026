@@ -14,18 +14,18 @@ JDK 27, the second STS release after JDK 25 LTS, headlines with Compact Object H
 TLS 1.3, G1 as default GC, and JFR data redaction. Several long-running previews continue: Structured Concurrency (7th), Primitive Types in Patterns (5th), Lazy Constants (3rd), and Vector API (12th incubator).
 Looking also a bit more ahead, JDK 28 brings Project Valhalla's Value Objects, promising to merge OOP abstractions with primitive performance, and probably a bit more
 
-Following https://www.youtube.com/watch?v=ejhok_F3fHg
-and https://www.youtube.com/watch?v=UnA2jRVNb3M
+Following jdk21-25 https://www.youtube.com/watch?v=ejhok_F3fHg
+.........and jdk26 https://www.youtube.com/watch?v=UnA2jRVNb3M
 
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
 #  Short reminder of release cycle
 
-3x sts - evey half a year
-1x lts - every 2 years
-replaced feature driven releases for jdk8 and older. JDK9 was 9/2017, JDK8 was 9/2014 and JDK7 7/2011
-Originally the LTS was there every 3 years
-There is no LTS - LTS serves for oracle JDK. OpenJDK aligns to it
-usually the STS serves as preview for next LTS, but what is not in last STS, may be in troubles
+* 3x sts - evey half a year
+* 1x lts - every 2 years
+* replaced feature driven releases for jdk8 and older. JDK9 was 9/2017, JDK8 was 9/2014 and JDK7 7/2011
+* Originally the LTS was there every 3 years
+* There is no LTS - LTS serves for oracle JDK. OpenJDK aligns to it
+* usually the STS serves as preview for next LTS, but what is not in last STS, may be in troubles
 
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
 # Migration path in Developers minds
@@ -39,6 +39,8 @@ usually the STS serves as preview for next LTS, but what is not in last STS, may
       * which?
   * Who is jumping from LTS to another LTS?
     * and just checking the new features passively
+  * How in production?
+  * What is source of STS?
 
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
 #  JDK27 (15/9/2027)
@@ -88,23 +90,22 @@ August 2026:
    540:	Simple JSON API (Incubator)
    541:	Deprecate the macOS/x64 Port for Removal
    542:	PEM Encodings of Cryptographic Objects	2026/08/26 
-
-  No more preview?
+	  No more preview?
 
 So Valhalla will still be preview, but at least you do not need special repo/build and is just ok to enable it on cmdline
 
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
 # and bit of available features in JDK 28
-## JSON?
-https://openjdk.org/jeps/540 JEP 540: Simple JSON API (Incubator)
 
+## JSON?
+https://openjdk.org/jeps/540 - JEP 540: Simple JSON API (Incubator)
 
 ## No preview?
-542:	PEM Encodings of Cryptographic Objects
+https://openjdk.org/jeps/542 - JEP 542:	PEM Encodings of Cryptographic Objects
 
 ## And few more
-535:	Shenandoah GC: Generational Mode by Default
-541:	Deprecate the macOS/x64 Port for Removal
+https://openjdk.org/jeps/535 - JEP 535:	Shenandoah GC: Generational Mode by Default
+https://openjdk.org/jeps/541 - JEP 541:	Deprecate the macOS/x64 Port for Removal
 
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
 # [Post-Quantum Hybrid Key Exchange for TLS 1.3](https://openjdk.org/jeps/527)
@@ -131,7 +132,7 @@ Demo!
 # 536: [JFR In-Process Data Redaction](https://openjdk.org/jeps/536)
 
 * Removal of sensitive information from JFR events and recordings
-* Default behavior is changed, use ` -XX:FlightRecorderOptions:'redact-argument=none,redact-key=none' to restore it
+* Default behavior is changed, use ` -XX:FlightRecorderOptions:'redact-argument=none,redact-key=none'` to restore it
 * it is glob, not regex (speed)
 
 Demo!
@@ -213,7 +214,6 @@ Header (compact):
  * primitives only
  * each vector operates only with vector
    * "builder" like chaining
- * demo!
 
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
 # 537: [Vector API (Twelfth Incubator)](https://openjdk.org/jeps/537) 2/3
@@ -226,6 +226,8 @@ Header (compact):
    * https://openjdk.org/projects/babylon/
    * `LINQ` like approach
    * High level api is produced by javac and is later on the fly compiled  to non-java languages
+
+ * demos!
 
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
 # 537: [Vector API (Twelfth Incubator)](https://openjdk.org/jeps/537) 3/3a1
@@ -290,6 +292,7 @@ Header (compact):
 | **Vectors on floats: 145.5ms (136%)**  | Vectors on floats: 106.25ms (95%) |
 | Vectors on float: 113.125ms (105%)     | Vectors on float: 115.25ms (103%) |
 | Vector on float: 113.5ms (106%)        | Vector on float: 107.375ms (96%)  |
+
 ## Main2.java - a lot of iterations
 | aarch64-4                            | intel64-4                           |
 | ------------------------------------ | ----------------------------------- |
@@ -315,6 +318,7 @@ Header (compact):
 | **Vectors on floats: 172.625ms (125%)**| Vectors on floats: 119.875ms (30%) |
 | **Vectors on float: 142.625ms (103%)** | Vectors on float: 153.125ms (38%)  |
 | Vector on float: 144.875ms (105%)      | Vector on float: 123.25ms (31%)    |
+
 ## Main2.java - a lot of iterations
 | aarch64-16                           | intel64-16                               |
 | -------------------------------------| ------------------------------------     |
@@ -340,6 +344,7 @@ Header (compact):
 | Vectors on floats: 175.0ms (125%) | Vectors on floats: 115.375ms (103%) |
 | Vectors on float: 141.5ms (101%)  | Vectors on float: 125.125ms (112%)  |
 | Vector on float: 139.25ms (99%)   | Vector on float: 114.125ms (102%)   |
+
 ## Main3.java - a lot of iterations
 | aarch64-4                          | intel64-4                           |
 | ---------------------------------- | ----------------------------------- |
@@ -365,6 +370,7 @@ Header (compact):
 | Vectors on floats: 204.875ms (104%) | Vectors on floats: 122.0ms (105%)      |
 | Vectors on float: 172.625ms (88%)   | **Vectors on float: 196.625ms (170%)** |
 | Vector on float: 169.375ms (86%)    | **Vector on float: 136.75ms (118%)**   |
+
 ## Main3.java - a lot of iterations
 | aarch64-16                         | intel64-16                         |
 | ---------------------------------- | ---------------------------------- |
@@ -384,6 +390,7 @@ Header (compact):
 | ------------------------------------     | -------------------------------- |
 | Primitive Arrays: 3336.625ms             | Primitive Arrays: 3056.875ms     |
 | **Vectors on floats: 3413.875ms (102%)** | Vectors on floats: 857.5ms (28%) |
+
 ## Main4.java
 | aarch64-16                               | intel64-16                       |
 | ------------------------------------     | -------------------------------- |
@@ -401,9 +408,11 @@ Header (compact):
  * Still preview in 27
    * isInitialized and orElse removed
    * Set.ofLazy added
- * performance improvements 25<26<?27
+ * performance improvements `25<26<?27`
  * Be aware of `500: Prepare to Make Final Mean Final (JDK26)`
  * It is moreover done, but its "harder" usages (like AOT or class cache), are still to be done
+
+ * Demo!
 
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
 # Sealed keyword
