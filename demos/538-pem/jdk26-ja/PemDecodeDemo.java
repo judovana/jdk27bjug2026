@@ -7,7 +7,7 @@ public class PemDecodeDemo {
     public static void main(String[] args) throws Exception {
 
         String pemText = """
------BEGIN PLUBLIC KEY-----
+-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4skHCJWKI5sf6ouZR1QD
 SDDx7ZaxPPD8RyB8Fj/lV91FUv9kI3Zpl85PWOZ8RS4InXfYTHaTgD6p/Cse4s02
 TBRJ5/Ttm47hm6jfQJe7njZdUAIjthNuxNCylmZ8vpT1fBZUeRNrALNnmoP8/gTY
@@ -15,7 +15,7 @@ zCPjoXqy2uScZlnHWWKWJn/Vd+/DpnZlgVdfg1VTYS4/rxFPqtH8YTml87FF84u7
 IHJ5w/FTNslTUCXPVCpuUJhbpLy8rz4DETz235XQIVwGt6kT9ve/ARcb99Ts8Hgm
 OilAfmQ/rhNobH//EFq+u8u34+rD19YRVSJqfLTYunexRuHjKkWFFAV08AM97GwR
 HwIDAQAB1
------END PLUBLIC KEY-----
+-----END PUBLIC KEY-----
                 """;
 
         PEMDecoder decoder = PEMDecoder.of();

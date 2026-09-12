@@ -14,15 +14,18 @@ JDK 27, the second STS release after JDK 25 LTS, headlines with Compact Object H
 TLS 1.3, G1 as default GC, and JFR data redaction. Several long-running previews continue: Structured Concurrency (7th), Primitive Types in Patterns (5th), Lazy Constants (3rd), and Vector API (12th incubator).
 Looking also a bit more ahead, JDK 28 brings Project Valhalla's Value Objects, promising to merge OOP abstractions with primitive performance, and probably a bit more
 
-Following jdk21-25 https://www.youtube.com/watch?v=ejhok_F3fHg
-.........and jdk26 https://www.youtube.com/watch?v=UnA2jRVNb3M
+Following jdk21-25       https://www.youtube.com/watch?v=ejhok_F3fHg
+.........and jdk26 and   https://www.youtube.com/watch?v=UnA2jRVNb3M
+Most expected features   https://www.youtube.com/watch?v=iPJ5vSiXbCE
+
+If you saw them, grab a beer or two.
 
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
 #  Short reminder of release cycle
 
-* 3x sts - evey half a year
-* 1x lts - every 2 years
-* replaced feature driven releases for jdk8 and older. JDK9 was 9/2017, JDK8 was 9/2014 and JDK7 7/2011
+* 3x STS - evey half a year
+* 1x LTS - every 2 years
+* replaced feature driven releases for JDK8 and older. JDK9 was 9/2017, JDK8 was 9/2014 and JDK7 7/2011
 * Originally the LTS was there every 3 years
 * There is no LTS - LTS serves for oracle JDK. OpenJDK aligns to it
 * usually the STS serves as preview for next LTS, but what is not in last STS, may be in troubles
@@ -74,7 +77,7 @@ Both are https://bugs.openjdk.org/browse/JDK-8379439, and where swing is really 
 The components are not going to land in jdk27
 
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
-# and bit of available features in JDK 28
+# and bit of available features in JDK 28 1/2
 ## Project Valhalla
 
 https://openjdk.org/projects/valhalla/ :
@@ -82,6 +85,7 @@ Project Valhalla is augmenting the Java object model with value objects, combini
 
 August 2026:
     "JEP 401: Value Objects (Preview) and JEP 539: Strict Field Initialization in the JVM (Preview) are now integrated and will be included in JDK 28"
+    - So finally form separate fork to main JDK codebase!
 
 => https://openjdk.org/projects/jdk/28/ :
 ** 401:	Value Objects (Preview)
@@ -95,7 +99,11 @@ August 2026:
 So Valhalla will still be preview, but at least you do not need special repo/build and is just ok to enable it on cmdline
 
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
-# and bit of available features in JDK 28
+# and bit of available features in JDK 28 2/2
+
+## Valhalla  2/3
+https://openjdk.org/jeps/401 - JEP401:	Value Objects (Preview)
+https://openjdk.org/jeps/539 - JEP539:	Strict Field Initialization in the JVM (Preview)
 
 ## JSON?
 https://openjdk.org/jeps/540 - JEP 540: Simple JSON API (Incubator)
@@ -126,7 +134,7 @@ params.setNamedGroups(new String[] {
 
 Where first two are postquantum, other other two are backwards compatibility
 
-Demo!
+Demos!
 
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
 # 536: [JFR In-Process Data Redaction](https://openjdk.org/jeps/536)
@@ -433,6 +441,8 @@ or public non-sealed class Car extends Vehicle implements Service {
  * no changes in jdk25
  * again no change in jdk27
 
+ * Constants remains still as future work!
+
  * Sorry for the Demo. I was recently moved to AI project, and am still wondering what happened to our industry
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
 # 538: [PEM Encodings of Cryptographic Objects (Third Preview)](https://openjdk.org/jeps/538)
@@ -476,7 +486,7 @@ new in  JDK 27:
 * The Joiner factory methods `allSuccessfulOrThrow()`, `anySuccessfulOrThrow()`, and `awaitAllSuccessfulOrThrow()` now create joiners that cause `join()` to throw an ExecutionException when the outcome is an exception.
   * New overloads of the three methods allow a Function to be specified to produce a different exception.
   * The Joiner factory method `awaitAll()` has been removed.
-* The `onTimeout()` method of the Joiner interface has been replaced by the `timeout()` method, which either produces the result or throws an exception when the scope is cancelled by a timeout
+* The `onTimeout()` ->  `timeout()` method, which either produces the result or throws an exception when the scope is canceled by a timeout
   * If the `timeout()` method throws an exception then the exception is thrown with a `CancelledByTimeoutException` as the cause.
 
 demos-new

@@ -34,7 +34,9 @@ HwIDAQAB
                 System.out.println("Generic PEM, bytes: " + raw.length);
                 System.out.println("Generic PEM, content: " + raw);
             }
-            default -> System.out.println("Other type: " + decoded.getClass());
+            default -> {
+                System.out.println("Other type: " + decoded.getClass());
+            }
         }
     }
 }
