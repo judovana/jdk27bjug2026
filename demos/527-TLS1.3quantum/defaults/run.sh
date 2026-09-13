@@ -21,7 +21,7 @@ $KEY_JDK/bin/keytool -importcert   -alias "$ALIAS"   -file server.crt   -keystor
 rm -f server.crt
 
 #$SERVER_JDK/bin/java -Djava.security.debug=all+thread+timestamp Server.java &
-$SERVER_JDK/bin/java -Djavax.net.debug=ssl:handshake+thread+timestamp Server.java 2>&1 | tee server | grep -ie MLKEM & #grep -ie "named group" &
+$SERVER_JDK/bin/java -Djavax.net.debug=ssl:handshake+thread+timestamp Server.java 2>&1 | tee server | grep -ie MLKEM -e "named group" &
 
 SERVER_PID=$!
 echo "=== Server PID: $SERVER_PID === "
@@ -41,7 +41,7 @@ sleep 1
 
 echo "===  Run client with $CLIENT_JDK ==="
 #$CLIENT_JDK/bin/java -Djava.security.debug=all+thread+timestamp Client.java
-$CLIENT_JDK/bin/java -Djavax.net.debug=ssl:handshake+thread+timestamp Client.java 2>&1 | tee client | grep -ie MLKEM & # grep -ie "named group"
+$CLIENT_JDK/bin/java -Djavax.net.debug=ssl:handshake+thread+timestamp Client.java 2>&1 | tee client | grep -ie MLKEM -e "named group" -e "hello world"
 
 # debug is preventing 
 # ps, kill server!!!

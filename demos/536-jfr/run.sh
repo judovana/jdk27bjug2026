@@ -8,8 +8,10 @@ function check() {
 }
 
 export ACCESS_TOKEN=SECRET_TOKEN
-export PASWORD=12345
+export PASWORD=12345  #intentional typo
 
+
+echo  "==== jdk21 ==="
 set +x
 /usr/lib/jvm/java-21-openjdk/bin/java \
        -XX:StartFlightRecording:filename=dump21.jfr \
@@ -20,6 +22,8 @@ set +x
       --dbpasword 6789 2>&1 | head -n5
 check dump21.jfr
 
+
+echo  "==== jdk27 with disbaled 536==="
 set +x
 /usr/lib/jvm/java-latest-openjdk/bin/java \
        -XX:StartFlightRecording:filename=dump27_0.jfr \
@@ -31,6 +35,7 @@ set +x
       --dbpasword 6789 2>&1 | head -n5
 check dump27_0.jfr 
 
+echo  "==== jdk27 on defaults==="
 set +x
 /usr/lib/jvm/java-latest-openjdk/bin/java \
        -XX:StartFlightRecording:filename=dump27_1.jfr \
@@ -41,6 +46,8 @@ set +x
       --dbpasword 6789 2>&1 | head -n5
 check dump27_1.jfr 
 
+
+echo  "==== jdk27 with custom filters==="
 set +x
 /usr/lib/jvm/java-latest-openjdk/bin/java \
        -XX:StartFlightRecording:filename=dump27_2.jfr \

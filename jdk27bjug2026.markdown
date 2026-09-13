@@ -7,12 +7,8 @@ By Jiri Vanek from IBM's OpenJDK team.
 
 Second STS release, year after feature full LTS JDK25
 
-abstract (remove)
-Cryptography in slow and necessary progress, stable and compatible VM improvements with big impact and 4 impressive tech-previews in (hopefully) last iterations
-abstract longer (remove)
-JDK 27, the second STS release after JDK 25 LTS, headlines with Compact Object Headers by default — shrinking them from 64 bits for ~15% less heap and ~5% less CPU. Other production features include Post-Quantum Key Exchange for
-TLS 1.3, G1 as default GC, and JFR data redaction. Several long-running previews continue: Structured Concurrency (7th), Primitive Types in Patterns (5th), Lazy Constants (3rd), and Vector API (12th incubator).
-Looking also a bit more ahead, JDK 28 brings Project Valhalla's Value Objects, promising to merge OOP abstractions with primitive performance, and probably a bit more
+
+
 
 Following jdk21-25       https://www.youtube.com/watch?v=ejhok_F3fHg
 .........and jdk26 and   https://www.youtube.com/watch?v=UnA2jRVNb3M
@@ -412,7 +408,7 @@ Header (compact):
  * First preview at JDK 25, as 502 Stable Values
  * 526 Lazy Constants since JDK 26
    * note the class changes
-   * quite  a lot of changes based on feedbacl
+   * quite  a lot of changes based on feedback
  * Still preview in 27
    * isInitialized and orElse removed
    * Set.ofLazy added

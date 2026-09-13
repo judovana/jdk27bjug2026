@@ -51,6 +51,6 @@ if [ ! "${RUN:-}" == true ] ; then
   set -x
   cat $master | grep delimiter -A 100 >> $srcs/Master.java
   mkdir $clss;
-  /usr/lib/jvm/java-latest-openjdk/bin/javac  --enable-preview --release 26 -d $clss $srcs/*
+  /usr/lib/jvm/java-latest-openjdk/bin/javac  --enable-preview --release 27 -d $clss $srcs/*
 fi
 /usr/lib/jvm/java-latest-openjdk/bin/java -cp `readlink -m $clss`  --enable-preview Master

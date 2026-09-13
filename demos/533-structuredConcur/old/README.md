@@ -1,6 +1,5 @@
 ##  533: [Structured Concurrency (Fifth Preview)](https://openjdk.org/jeps/533)
 
- * `/usr/lib/jvm/java-latest-openjdk/bin/java  --enable-preview  --source 27 Demo.java `  without/with exception
  * `/usr/lib/jvm/java-latest-openjdk/bin/java   Main1.java ` - threads
  * `/usr/lib/jvm/java-latest-openjdk/bin/java   Main2.java ` nicer threads
    * ugly, demonstrates verbosity and join
