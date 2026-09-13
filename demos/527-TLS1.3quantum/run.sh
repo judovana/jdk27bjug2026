@@ -7,9 +7,9 @@ PASSWORD="changeit"
 ALIAS="server"
 PORT=8443
 SERVER_JDK=/usr/lib/jvm/java-latest-openjdk
-#SERVER_JDK=/usr/lib/jvm/java-21-openjdk # will cause reply termination
+#SERVER_JDK=/usr/lib/jvm/java-25-openjdk # will cause reply termination
 CLIENT_JDK=/usr/lib/jvm/java-latest-openjdk
-#CLIENT_JDK=/usr/lib/jvm/java-21-openjdk # will cause invlaid reply
+#CLIENT_JDK=/usr/lib/jvm/java-25-openjdk # will cause invlaid reply
 KEY_JDK=/usr/lib/jvm/temurin-8-jdk
 
 

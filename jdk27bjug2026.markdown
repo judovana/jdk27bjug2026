@@ -64,7 +64,7 @@ If you saw them, grab a beer or two.
 
 In May 2026 there was an rumor that Swing is still alive, and there is going to be new components of
 * JDatePicker
-* JCalendarPane.
+* JCalendarPane
 * based on awesome https://www.youtube.com/watch?v=ux1IpWo3oXA
 
 in **next release of JDK**
@@ -138,6 +138,9 @@ Demos!
 * Removal of sensitive information from JFR events and recordings
 * Default behavior is changed, use ` -XX:FlightRecorderOptions:'redact-argument=none,redact-key=none'` to restore it
 * it is glob, not regex (speed)
+ * some defaults like password, token...
+ * case insensitive
+ * customs can override or append (+)
 
 Demo!
 

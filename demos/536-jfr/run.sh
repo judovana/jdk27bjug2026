@@ -47,7 +47,7 @@ set +x
 check dump27_1.jfr 
 
 
-echo  "==== jdk27 with custom filters==="
+echo  "==== jdk27 with custom filters trap==="
 set +x
 /usr/lib/jvm/java-latest-openjdk/bin/java \
        -XX:StartFlightRecording:filename=dump27_2.jfr \
@@ -59,3 +59,18 @@ set +x
       --dbpasword 6789 2>&1 | head -n5
 check dump27_2.jfr
 
+echo  "==== jdk27 with custom filters final==="
+set +x
+/usr/lib/jvm/java-latest-openjdk/bin/java \
+       -XX:StartFlightRecording:filename=dump27_2.jfr \
+       -XX:FlightRecorderOptions:'redact-key=+*pasword*,redact-argument=+*pasword*' \
+       -Xmx2G \
+       -Djavax.net.ssl.keyStorePassword=SECRET_PASSWORD \
+       ../527-TLS1.3quantum/Client.java \
+      --dbpassword ANOTHER_SECRET_PASSWORD \
+      --dbpasword=6789 2>&1 | head -n5
+check dump27_2.jfr
+
+
+echo "in jmc, they will be eg in Environment-> System properties"
+echo "  there will be more redacted eg in variables"
