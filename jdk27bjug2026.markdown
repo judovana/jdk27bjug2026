@@ -179,7 +179,7 @@ Demo!
    * -XX:-UseCompactObjectHeaders ...
   * maximal measured impact
     * 22% less heap space and 10% less CPU time.
- * average impact 15% less hap 5% of CPU
+ * average impact 15% less heap 5% of CPU
 
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
 # 534: [Compact Object Headers by Default](https://openjdk.org/jeps/534) 2/2

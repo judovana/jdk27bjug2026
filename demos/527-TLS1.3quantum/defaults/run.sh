@@ -21,7 +21,7 @@ $KEY_JDK/bin/keytool -importcert   -alias "$ALIAS"   -file server.crt   -keystor
 rm -f server.crt
 
 #$SERVER_JDK/bin/java -Djava.security.debug=all+thread+timestamp Server.java &
-$SERVER_JDK/bin/java -Djavax.net.debug=ssl:handshake+thread+timestamp Server.java 2>&1 | tee server | grep -ie MLKEM -e "named group" &
+($SERVER_JDK/bin/java -Djavax.net.debug=ssl:handshake+thread+timestamp Server.java 2>&1 | tee server | grep -ie MLKEM -e "named group") &
 
 SERVER_PID=$!
 echo "=== Server PID: $SERVER_PID === "
