@@ -9,7 +9,8 @@
  * `/usr/lib/jvm/java-latest-openjdk/bin/java  --enable-preview  --source 27 Main5.java ` exception in structured concurency
  * `/usr/lib/jvm/java-latest-openjdk/bin/java  --enable-preview  --source 27 Main6.java ` scoped values in structured concurency
    * see 506-scoped/Framework6.java
- * https://www.youtube.com/watch?v=OcUAyTY2V7g
+   * thread from thread, the ThreadLocal will not work (as is)
+   * https://www.youtube.com/watch?v=OcUAyTY2V7g
 
 
 

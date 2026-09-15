@@ -22,12 +22,11 @@ rm -f server.crt
 
 #$SERVER_JDK/bin/java -Djava.security.debug=all+thread+timestamp Server.java &
 ($SERVER_JDK/bin/java -Djavax.net.debug=ssl:handshake+thread+timestamp Server.java 2>&1 | tee server | grep -ie MLKEM -e "named group") &
+SERVER_PID=`jps -v | grep javax.net.debug | sed 's/ .*//'`
 
-SERVER_PID=$!
 echo "=== Server PID: $SERVER_PID === "
 function killit() {
   echo "=== Shuting down server ==="
-  echo "debug is preventing"
   echo "jps/ps, kill server!!!"
   kill -9 "$SERVER_PID" 2>/dev/null
   wait "$SERVER_PID" 2>/dev/null
@@ -43,9 +42,12 @@ echo "===  Run client with $CLIENT_JDK ==="
 #$CLIENT_JDK/bin/java -Djava.security.debug=all+thread+timestamp Client.java
 $CLIENT_JDK/bin/java -Djavax.net.debug=ssl:handshake+thread+timestamp Client.java 2>&1 | tee client | grep -ie MLKEM -e "named group" -e "hello world"
 
-# debug is preventing 
-# ps, kill server!!!
-
- 
-
-
+set +e
+killit
+# debug is preventing; kill server!!!
+# ps/killall java
+ps
+jps
+echo "kill all java?"
+read a
+killall java

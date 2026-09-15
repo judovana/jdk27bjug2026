@@ -72,5 +72,8 @@ set +x
 check dump27_2.jfr
 
 
+echo "in jmc, they will be eg in JVM internals"
+echo "  Note JVM args and APP args separated"
 echo "in jmc, they will be eg in Environment-> System properties"
-echo "  there will be more redacted eg in variables"
+echo "in jmc, they will be eg in Environment-> Environment Variables"
+

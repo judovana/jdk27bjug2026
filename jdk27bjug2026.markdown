@@ -3,10 +3,9 @@
 
 By Jiri Vanek from IBM's OpenJDK team.
 16/9/2026, Brno - JUG meetup in https://impacthub.cz/brno/
-
+Please ask on the fly!
 
 Second STS release, year after feature full LTS JDK25
-
 
 
 
@@ -215,12 +214,13 @@ Header (compact):
  * preview since JDK 22
    * --enable-preview no longer needed
    * Still rolling!
- * SIMD
  * Compare JDK 25 x 27
    * no difference
+
+ * SIMD
  * primitives only
  * each vector operates only with vector
-   * "builder" like chaining
+ * "builder" like chaining
 
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
 # 537: [Vector API (Twelfth Incubator)](https://openjdk.org/jeps/537) 2/3
