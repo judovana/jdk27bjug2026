@@ -129,6 +129,11 @@ params.setNamedGroups(new String[] {
 
 Where first two are postquantum, other other two are backwards compatibility
 
+Backports to older JDKs are expected:
+ * Java 25 October 2026
+ * Java 21 and 17 v early 2027
+ * Java 11 and 8 late 2027
+
 Demos!
 
 --PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE----PAGE---
