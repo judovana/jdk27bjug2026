@@ -2,7 +2,7 @@
 ###    JDK27 JEPs in nutshell
 
 By Jiri Vanek from IBM's OpenJDK team.
-16/9/2026, Brno - JUG meetup in https://impacthub.cz/brno/
+16/9/2026, Brno - JUG meetup in https://clubco.cz/brno/
 Please ask on the fly!
 
 Second STS release, year after feature full LTS JDK25
