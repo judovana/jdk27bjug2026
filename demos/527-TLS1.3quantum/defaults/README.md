@@ -2,5 +2,6 @@
 
 * When nothing is set, what is run?
  * as expected, if server have it, it offers it
- *if client speaks that, it accepts that
+ * if client speaks that, it accepts that
 * sh run.sh
+  *  now run with debug ON, so the used algorithms can be seen
