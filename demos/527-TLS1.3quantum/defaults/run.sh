@@ -1,18 +1,26 @@
 #!/usr/bin/bash
-set -euo pipefail
+set -eo pipefail
 
 KEYSTORE="server.p12"
 TRUSTSTORE="truststore.p12"
 PASSWORD="changeit"
 ALIAS="server"
-PORT=8443
-#ahve you killed the server?
-SERVER_JDK=/usr/lib/jvm/java-latest-openjdk
-#SERVER_JDK=/usr/lib/jvm/java-21-openjdk # will cause reply termination
-CLIENT_JDK=/usr/lib/jvm/java-latest-openjdk
-#CLIENT_JDK=/usr/lib/jvm/java-21-openjdk # will cause invlaid reply
-KEY_JDK=/usr/lib/jvm/temurin-8-jdk
+if [ -z $FORCE_PORT ] ; then
+  export FORCE_PORT=8443
+fi
+if [ -z $SERVER_JDK ] ; then
+  SERVER_JDK=/usr/lib/jvm/java-latest-openjdk
+  #SERVER_JDK=/usr/lib/jvm/java-21-openjdk # will cause reply termination
+fi
+if [ -z $CLIENT_JDK ] ; then
+  CLIENT_JDK=/usr/lib/jvm/java-latest-openjdk
+  #CLIENT_JDK=/usr/lib/jvm/java-21-openjdk # will cause invlaid reply
+fi
+if [ -z $KEY_JDK ] ; then
+  KEY_JDK=/usr/lib/jvm/temurin-8-jdk
+fi
 
+set -u
 
 rm -f "$KEYSTORE" "$TRUSTSTORE"
 $KEY_JDK/bin/keytool -genkeypair   -alias "$ALIAS"   -keyalg RSA   -keysize 2048   -validity 365   -dname "CN=localhost, OU=Dev, O=Demo, L=City, ST=State, C=US"   -keystore "$KEYSTORE"   -storetype PKCS12   -storepass "$PASSWORD"   -keypass "$PASSWORD"

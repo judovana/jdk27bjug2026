@@ -29,16 +29,31 @@ public class Client {
         // The handshake will fail if the server does not support a post-quantum key exchange.
         SSLParameters sslParams = new SSLParameters();
         sslParams.setProtocols(new String[]{"TLSv1.3"});
+        String forcedCurves = System.getenv("CLIENT_FORCE_CURVES");
+                if (forcedCurves != null) {
+                   System.out.println("Client  Setting : " + forcedCurves);
+                   if (forcedCurves.equalsIgnoreCase("defaults")) {
+                     //do nothing
+                   } else {
+                     sslParams.setNamedGroups(forcedCurves.split("\\s+"));
+                   }
+                } else {
         //sslParams.setNamedGroups(new String[]{"SecP256r1MLKEM768", "X25519MLKEM768"});
         //sslParams.setNamedGroups(new String[] {"secp256r1", "x25519"});
+                }
 
         HttpClient client = HttpClient.newBuilder()
                 .sslContext(sslContext)
                 .sslParameters(sslParams)
                 .build();
 
+        String forcedPort = System.getenv("FORCE_PORT");
+        int port=8443;
+        if (forcedPort != null) {
+          port=Integer.parseInt(forcedPort);
+        }
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://localhost:8443/"))
+                .uri(URI.create("https://localhost:"+port+"/"))
                 .GET()
                 .build();
 

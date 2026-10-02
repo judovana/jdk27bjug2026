@@ -36,8 +36,18 @@ public class Server {
                 SSLParameters sslParams = getSSLContext().getDefaultSSLParameters();
                 // TLS 1.3 only — no classical fallback
                 sslParams.setProtocols(new String[]{"TLSv1.3"});
-                // Restrict key exchange to ML-KEM-768 (post-quantum, JEP 527)                  ˇrestore backwards compatibility (in scope of tls 1.3)
-                //sslParams.setNamedGroups(new String[] {"SecP256r1MLKEM768", "X25519MLKEM768"/*, "secp256r1", "x25519"*/});
+                String forcedCurves = System.getenv("SERVER_FORCE_CURVES");
+                if (forcedCurves != null) {
+                   System.out.println("Server Setting : " + forcedCurves);
+                   if (forcedCurves.equalsIgnoreCase("defaults")) {
+                     //do nothing
+                   } else {
+                     sslParams.setNamedGroups(forcedCurves.split("\\s+"));
+                   }
+                } else {
+                  // Restrict key exchange to ML-KEM-768 (post-quantum, JEP 527)                  ˇrestore backwards compatibility (in scope of tls 1.3)
+                  //sslParams.setNamedGroups(new String[] {"SecP256r1MLKEM768", "X25519MLKEM768"/*, "secp256r1", "x25519"*/});
+                }
                 params.setSSLParameters(sslParams);
             }
         });
@@ -55,6 +65,6 @@ public class Server {
 
         server.setExecutor(null);
         server.start();
-        System.out.println("HTTPS server started on https://localhost:8443/");
+        System.out.println("HTTPS server started on https://localhost:"+port+"/");
     }
 }
