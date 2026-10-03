@@ -29,7 +29,12 @@ public class Server {
         SSLContext sslContext = SSLContext.getInstance("TLS");
         sslContext.init(kmf.getKeyManagers(), null, null);
 
-        HttpsServer server = HttpsServer.create(new InetSocketAddress(8443), 0);
+        int port=8443;
+        String forcedPort = System.getenv("FORCE_PORT");
+        if (forcedPort != null) {
+          port=Integer.parseInt(forcedPort);
+        }
+        HttpsServer server = HttpsServer.create(new InetSocketAddress(port), 0);
         server.setHttpsConfigurator(new HttpsConfigurator(sslContext) {
             @Override
             public void configure(HttpsParameters params) {
